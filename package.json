@@ -1,0 +1,32 @@
+{
+  "name": "tarefa3-postgres-conn",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "tsx src/index.ts",
+    "chart:volume": "tsx src/scripts/chart-volume.ts",
+    "chart:top-locais": "tsx src/scripts/chart-top-locais.ts",
+    "chart:top-cid": "tsx src/scripts/chart-top-cid.ts",
+    "chart:tipo-unidade": "tsx src/scripts/chart-tipo-unidade.ts",
+    "chart:idade": "tsx src/scripts/chart-idade.ts",
+    "migration:generate": "node -e \"const {spawnSync}=require('node:child_process'); const args=process.argv.slice(1); const name=args.shift(); if(!name){console.error('Uso: npm run migration:generate -- <nome> [--dryrun] [--pretty] [--check]'); process.exit(1);} const cli='./node_modules/typeorm/cli-ts-node-esm.js'; const out=`src/migrations/${name}`; const r=spawnSync('node',[cli,'migration:generate','-d','./src/data-source.ts',out,...args],{stdio:'inherit'}); process.exit(r.status??1);\"",
+    "migration:run": "node ./node_modules/typeorm/cli-ts-node-esm.js migration:run -d ./src/data-source.ts",
+    "migration:revert": "node ./node_modules/typeorm/cli-ts-node-esm.js migration:revert -d ./src/data-source.ts",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "chart.js": "^4.5.0",
+    "chartjs-node-canvas": "^5.0.0",
+    "dotenv": "^17.2.0",
+    "pg": "^8.16.3",
+    "reflect-metadata": "^0.2.2",
+    "typeorm": "^0.3.26"
+  },
+  "devDependencies": {
+    "@types/node": "^25.6.0",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.20.5",
+    "typescript": "^5.9.2"
+  }
+}
